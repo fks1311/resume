@@ -1,3 +1,5 @@
+import DefaultPage from "../../global/DefaultPage";
+
 export default function Home() {
-  return <div>Home</div>;
+  return <DefaultPage>Home</DefaultPage>;
 }

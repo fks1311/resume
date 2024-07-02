@@ -6,25 +6,33 @@ export default function GlobalNavigation() {
   const nav = ["profiles", "my"];
 
   return (
-    <>
-      <NavContainer>
+    <PageContainer>
+      <Header>
+        <div onClick={() => navigate("/")}>Hi</div>
         {nav.map((n, idx) => (
           <div key={idx} onClick={() => navigate(`/${n}`)}>
             {n}
           </div>
         ))}
-      </NavContainer>
+      </Header>
       <Outlet />
-    </>
+    </PageContainer>
   );
 }
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
 
-const NavContainer = styled.div`
+const Header = styled.header`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 2rem;
+  width: inherit;
+  max-width: 1200px;
   height: 65px;
-  padding: 0rem 3rem;
   cursor: pointer;
 `;

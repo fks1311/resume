@@ -1,3 +1,5 @@
+import DefaultPage from "../../global/DefaultPage";
+
 export default function Profiles() {
-  return <div>Profiles</div>;
+  return <DefaultPage>Profiles</DefaultPage>;
 }
