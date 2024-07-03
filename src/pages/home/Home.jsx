@@ -1,4 +1,4 @@
-import DefaultPage from "../../global/DefaultPage";
+import DefaultPage from "components/global/DefaultPage";
 
 export default function Home() {
   return <DefaultPage>Home</DefaultPage>;

@@ -1,4 +1,4 @@
-import DefaultPage from "../../global/DefaultPage";
+import DefaultPage from "components/global/DefaultPage";
 
 export default function Profiles() {
   return <DefaultPage>Profiles</DefaultPage>;
