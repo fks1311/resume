@@ -3,8 +3,9 @@ import { styled } from "styled-components";
 
 const DefaultPage = forwardRef(({ children }, ref) => {
   return (
-    <PageContainer className="page">
-      <ViewContainer className="view">{children}</ViewContainer>
+    <PageContainer className="default-page">
+      {children}
+      {/* <ViewContainer className="default-view">{children}</ViewContainer> */}
     </PageContainer>
   );
 });
@@ -14,7 +15,6 @@ const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 1rem;
 `;
 const ViewContainer = styled.div`
   width: inherit;
