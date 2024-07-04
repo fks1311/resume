@@ -1,14 +1,18 @@
-import { forwardRef, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 
 const TextInput = forwardRef((props, ref) => {
-  const input = useRef();
+  const cur = useRef();
   const { ftSize, placeholder } = props;
+
+  useEffect(() => {
+    console.log(cur.current.getBoundingClientRect().width);
+  }, []);
 
   return (
     <Container>
       <Input
-        ref={input}
+        ref={cur}
         $ftSize={ftSize}
         placeholder={placeholder ?? undefined}
       />
