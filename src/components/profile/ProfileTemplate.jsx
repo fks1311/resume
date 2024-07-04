@@ -2,12 +2,14 @@ import { forwardRef } from "react";
 import { styled } from "styled-components";
 import EssentialInfoProfile from "components/profile/profile-content/EssentialInfoProfile";
 import OccupationProfile from "components/profile/profile-content/OccupationProfile";
+import UsableSkill from "./profile-content/UsableSkill";
 
 const ProfileTemplate = forwardRef(({ children }, ref) => {
   return (
     <ViewContainer className="profile-container">
       <EssentialInfoProfile />
       <OccupationProfile />
+      <UsableSkill />
     </ViewContainer>
   );
 });
