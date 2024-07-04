@@ -2,21 +2,24 @@ import { forwardRef } from "react";
 import { styled } from "styled-components";
 
 const TextInput = forwardRef((props, ref) => {
-  const { ftSize } = props;
+  const { ftSize, placeholder } = props;
 
   return (
     <Container>
-      <Input $ftSize={ftSize} />
+      <Input $ftSize={ftSize} placeholder={placeholder ?? undefined} />
     </Container>
   );
 });
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #333;
+`;
 const Input = styled.input`
   // font-size: ${({ $ftSize }) => `${$ftSize}px` ?? undefined};
+  font-size: 16px;
   outline: none;
   border: none;
-  border-bottom: 1px solid #333;
 `;
 
 export default TextInput;
