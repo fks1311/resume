@@ -16,6 +16,7 @@ const FormColumn = forwardRef((props, ref) => {
 const Container = styled.div`
   display: flex;
   align-items: center;
+  align-items: flex-end;
   gap: 0.5rem;
 `;
 const TitleColumn = styled.div``;

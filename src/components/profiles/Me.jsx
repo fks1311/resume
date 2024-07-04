@@ -1,5 +1,5 @@
-import Profile from "components/global/Profile";
+import ProfileTemplate from "components/profile/ProfileTemplate";
 
 export default function Me() {
-  return <Profile />;
+  return <ProfileTemplate />;
 }
