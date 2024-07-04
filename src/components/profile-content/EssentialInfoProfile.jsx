@@ -14,7 +14,7 @@ const EssentialInfoProfile = forwardRef(({ children }, ref) => {
     <Container className="essential-info">
       <Images />
       <BasicInfoInput>
-        <FormColumn render={() => <BsFillPersonFill />} />
+        <FormColumn render={() => <BsFillPersonFill />} ftSize={40} />
         <FormColumn render={() => <BsTelephone />} />
         <FormColumn render={() => <BsGithub />} />
         <FormColumn render={() => <BsLink />} />
@@ -25,12 +25,12 @@ const EssentialInfoProfile = forwardRef(({ children }, ref) => {
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-around;
 `;
 const BasicInfoInput = styled.div`
   display: flex;
-  gap: 1rem;
   flex-direction: column;
+  gap: 1rem;
+  margin: 1rem;
 `;
 
 export default EssentialInfoProfile;

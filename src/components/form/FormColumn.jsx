@@ -3,12 +3,12 @@ import { styled } from "styled-components";
 import TextInput from "components/inputs/TextInput";
 
 const FormColumn = forwardRef((props, ref) => {
-  const { render } = props;
+  const { render, ftSize } = props;
 
   return (
     <Container className="FormColumn">
       {render && <TitleColumn>{render()}</TitleColumn>}
-      <TextInput />
+      <TextInput ftSize={ftSize} />
     </Container>
   );
 });
