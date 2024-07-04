@@ -18,7 +18,9 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   h1 {
+    width: 100px;
     margin: 1rem;
+    text-align: center;
   }
 `;
 const JobContainer = styled.div`
