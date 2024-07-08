@@ -2,9 +2,14 @@ import { useState, forwardRef } from "react";
 import { styled } from "styled-components";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const Images = forwardRef(({ children }, ref) => {
   const [preview, setPreview] = useState();
+  const variants = {
+    show: {},
+  };
+  const items = {};
 
   const imgFileUpload = (target) => {
     const reader = new FileReader();
@@ -15,7 +20,7 @@ const Images = forwardRef(({ children }, ref) => {
   };
 
   return (
-    <ImgFileContainer className="preview-container" solid={preview}>
+    <ImgFileContainer solid={preview}>
       {preview === undefined && (
         <label htmlFor="file_upload">
           <FileLabelContainer>
@@ -30,9 +35,9 @@ const Images = forwardRef(({ children }, ref) => {
         onChange={(e) => imgFileUpload(e.target.files[0])}
       />
       {preview && (
-        <PreviewContainer>
+        <PreviewContainer variants={variants} initial={false} animate="show">
           <MdCancel id="cancel" size={30} />
-          <ImgFile src={preview} alt="프로필 사진" className="preview" />
+          <ImgFile src={preview} alt="프로필 사진" />
         </PreviewContainer>
       )}
     </ImgFileContainer>
@@ -70,11 +75,12 @@ const FileSelectContainer = styled.input`
   display: none;
 `;
 
-const PreviewContainer = styled.div`
+const PreviewContainer = styled(motion.div)`
   position: relative;
   border-radius: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  cursor: pointer;
   #cancel {
     position: absolute;
     top: -4%;
@@ -82,7 +88,7 @@ const PreviewContainer = styled.div`
     color: #5c88c4;
   }
 `;
-const ImgFile = styled.img`
+const ImgFile = styled(motion.img)`
   height: 300px;
   width: 300px;
   background-size: contain;
