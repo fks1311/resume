@@ -14,7 +14,7 @@ const EssentialInfoProfile = forwardRef(({ children }, ref) => {
   return (
     <Container className="essential-info">
       <Images />
-      <BasicInfoInput>
+      <BasicInfoInput className="basic-input-container">
         <FormColumn render={() => <BsFillPersonFill />} ftSize={40} />
         <FormColumn render={() => <BsTelephone />} />
         <FormColumn render={() => <BsGithub />} />

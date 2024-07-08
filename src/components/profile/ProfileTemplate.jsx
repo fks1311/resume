@@ -31,5 +31,3 @@ const ViewContainer = styled.form`
 `;
 
 export default ProfileTemplate;
-
-// 데이터를 어디에
