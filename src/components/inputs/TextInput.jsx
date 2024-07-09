@@ -1,19 +1,14 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef, forwardRef } from "react";
 import { styled } from "styled-components";
 
 const TextInput = forwardRef((props, ref) => {
-  const curInput = useRef();
-  const { ftSize, placeholder } = props;
+  const curRef = useRef(null);
 
-  useEffect(() => {}, []);
+  const { ftSize, placeholder } = props;
 
   return (
     <Container>
-      <Input
-        ref={curInput}
-        $ftSize={ftSize}
-        placeholder={placeholder ?? undefined}
-      />
+      <Input placeholder={placeholder ?? undefined} />
     </Container>
   );
 });
@@ -23,6 +18,7 @@ const Container = styled.div`
 `;
 const Input = styled.input`
   // font-size: ${({ $ftSize }) => `${$ftSize}px` ?? undefined};
+  width: 200px;
   font-size: 16px;
   outline: none;
   border: none;

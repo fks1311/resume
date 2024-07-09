@@ -47,10 +47,10 @@ const Images = forwardRef(({ children }, ref) => {
 const ImgFileContainer = styled.div`
   height: 300px;
   width: 300px;
-  margin: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px;
   border: ${({ solid }) => solid === undefined && `2px dashed #b4b4b8`};
   border-radius: 10px;
 `;
