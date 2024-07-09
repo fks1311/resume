@@ -1,15 +1,11 @@
 import { useState, forwardRef } from "react";
+import { motion } from "framer-motion";
 import { styled } from "styled-components";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
-import { motion } from "framer-motion";
 
 const Images = forwardRef(({ children }, ref) => {
   const [preview, setPreview] = useState();
-  const variants = {
-    show: {},
-  };
-  const items = {};
 
   const imgFileUpload = (target) => {
     const reader = new FileReader();
@@ -17,6 +13,10 @@ const Images = forwardRef(({ children }, ref) => {
     reader.onload = () => {
       setPreview(reader.result);
     };
+  };
+
+  const closeImgFile = () => {
+    setPreview(undefined);
   };
 
   return (
@@ -35,8 +35,8 @@ const Images = forwardRef(({ children }, ref) => {
         onChange={(e) => imgFileUpload(e.target.files[0])}
       />
       {preview && (
-        <PreviewContainer variants={variants} initial={false} animate="show">
-          <MdCancel id="cancel" size={30} />
+        <PreviewContainer>
+          <MdCancel id="cancel" size={30} onClick={closeImgFile} />
           <ImgFile src={preview} alt="프로필 사진" />
         </PreviewContainer>
       )}
