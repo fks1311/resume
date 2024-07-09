@@ -4,10 +4,14 @@ import { RouterProvider } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import router from "./Router";
+import "./style/font/font.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const GlobalStyle = createGlobalStyle`
-  ${reset}
+  ${reset};
+  body {
+    font-family: 'HakgyoansimWoojuR', sans-serif;
+  }
 `;
 
 root.render(
