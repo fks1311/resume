@@ -2,10 +2,11 @@ import HashTagWrap from "components/form/HashTagWrap";
 import { forwardRef } from "react";
 import { styled } from "styled-components";
 
+// 기술 스택
 const UsableSkill = forwardRef((props, ref) => {
   return (
     <Container className="usable-skill">
-      <h1>기술 스택</h1>
+      <h1>해시</h1>
       <SkillContainer>
         <HashTagWrap placeholder={"사용 가능한 기술 태그를 입력하세요"} />
       </SkillContainer>
