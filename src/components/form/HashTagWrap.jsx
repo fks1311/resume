@@ -1,10 +1,8 @@
-import { useState, useCallback, forwardRef, useRef } from "react";
+import { useState, useCallback, forwardRef } from "react";
 import { styled } from "styled-components";
-import TextInput from "components/inputs/TextInput";
 
 const HashTagWrap = forwardRef((props, ref) => {
-  const curRef = useRef();
-  const [hashtagArray, setHashtagArray] = useState(["23"]);
+  const [hashtagArray, setHashtagArray] = useState([]);
   const [value, setValue] = useState("");
   const { placeholder } = props;
 
@@ -15,50 +13,58 @@ const HashTagWrap = forwardRef((props, ref) => {
   const handleEnterKeyPress = useCallback(
     (e) => {
       if (e.key === "Enter") {
-        setHashtagArray((prev) => [...prev, value]);
-        setValue("");
-        console.log(curRef.current.getBoundingClientRect());
+        // 한글 입력 시, 마지막 글자 입력 + 공백 에러 처리
+        const trimmedValue = value.trim();
+        if (trimmedValue !== "") {
+          setHashtagArray((prev) => [...prev, trimmedValue]);
+          setValue("");
+        }
       }
     },
     [value]
   );
 
   return (
-    <Container className="container">
-      {hashtagArray.map((tag, idx) => (
-        <DynamicTag
-          key={idx}
-          width={curRef?.current?.getBoundingClientRect()?.width}
-        >
-          {tag}
-        </DynamicTag>
-      ))}
-      <Tag ref={curRef}>
-        <input
-          value={value || ""}
-          onKeyDown={handleEnterKeyPress}
-          onChange={handlerTag}
-        />
-      </Tag>
+    <Container>
+      <HashWrap>
+        {hashtagArray.map((tag, idx) => (
+          <HashTag key={idx}>{tag}</HashTag>
+        ))}
+      </HashWrap>
+      <HashInput
+        value={value || ""}
+        placeholder={placeholder}
+        onKeyUp={handleEnterKeyPress}
+        onChange={handlerTag}
+      />
     </Container>
   );
 });
 
-const Container = styled.div``;
-const DynamicTag = styled.div`
-  width: ${({ width }) => width}px;
-  // width: 20px;
-  border-radius: 56px;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+const HashWrap = styled.div`
+  width: 550px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`;
+const HashTag = styled.div`
   padding: 8px 12px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 56px;
   background-color: #478ccf;
 `;
-const Tag = styled.span`
-  // width: 380px;
-  // padding: 5px;
-  // font-size: 16px;
-  // outline: none;
-  // border: none;
-  // border-bottom: 1px solid #eeedeb;
+const HashInput = styled.input`
+  width: 550px;
+  padding: 5px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #eeedeb;
 `;
 
 export default HashTagWrap;

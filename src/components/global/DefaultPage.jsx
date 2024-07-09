@@ -6,10 +6,11 @@ const DefaultPage = forwardRef(({ children }, ref) => {
 });
 
 const PageContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin-top: 1rem;
 `;
 
 export default DefaultPage;

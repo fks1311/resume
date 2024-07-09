@@ -29,7 +29,7 @@ const EssentialInfoProfile = forwardRef(({ children }, ref) => {
 const Container = styled.div`
   max-width: 800px;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
 `;
 const BasicInfoInput = styled.div`
   width: 400px;

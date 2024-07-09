@@ -18,9 +18,9 @@ const Container = styled.div`
   max-width: 800px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   h1 {
-    width: 300px;
+    width: 150px;
     margin: 20px;
     font-size: 18px;
     font-weight: bold;
@@ -28,7 +28,7 @@ const Container = styled.div`
   }
 `;
 const SkillContainer = styled.div`
-  width: 400px;
+  // width: 400px;
   display: flex;
   flex-direction: column;
   margin: 20px;

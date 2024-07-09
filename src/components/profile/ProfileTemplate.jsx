@@ -24,10 +24,10 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
 
 const ViewContainer = styled.form`
   width: inherit;
-  max-width: 960px;
+  max-width: 820px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   padding: 1rem;
   border: 1px solid #eeedeb;
   border-radius: 10px;
