@@ -62,6 +62,7 @@ const HashTag = styled.div`
 const HashInput = styled.input`
   width: 550px;
   padding: 5px;
+  white-space: pre-wrap;
   outline: none;
   border: none;
   border-bottom: 1px solid #eeedeb;

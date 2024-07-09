@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import EssentialInfoProfile from "components/profile/profile-content/EssentialInfoProfile";
 import OccupationProfile from "components/profile/profile-content/OccupationProfile";
 import UsableSkill from "components/profile/profile-content/UsableSkill";
+import SimpleIntroduce from "./profile-content/SimpleIntroduce";
 
 const ProfileTemplate = forwardRef(({ children }, ref) => {
   const {
@@ -16,6 +17,7 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
   return (
     <ViewContainer className="profile-container">
       <EssentialInfoProfile />
+      <SimpleIntroduce />
       <OccupationProfile />
       <UsableSkill />
     </ViewContainer>
