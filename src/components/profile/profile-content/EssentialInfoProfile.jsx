@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 import { styled } from "styled-components";
 import Images from "components/inputs/Images";
 import FormColumn from "components/form/FormColumn";
+import { MdOutlineLocalPostOffice } from "react-icons/md";
 import {
   BsFillPersonFill,
   BsTelephone,
@@ -15,8 +16,9 @@ const EssentialInfoProfile = forwardRef(({ children }, ref) => {
     <Container className="essential-info">
       <Images />
       <BasicInfoInput className="basic-input-container">
-        <FormColumn render={() => <BsFillPersonFill />} />
+        <FormColumn render={() => <BsFillPersonFill />} id="name" />
         <FormColumn render={() => <BsTelephone />} />
+        <FormColumn render={() => <MdOutlineLocalPostOffice />} />
         <FormColumn render={() => <BsGithub />} />
         <FormColumn render={() => <BsLink />} />
       </BasicInfoInput>
@@ -33,6 +35,7 @@ const BasicInfoInput = styled.div`
   width: 400px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
   margin: 20px;
 `;

@@ -21,14 +21,17 @@ const Container = styled.div`
   justify-content: center;
   h1 {
     width: 300px;
-    text-align: center;
     margin: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
   }
 `;
 const JobContainer = styled.div`
   width: 400px;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   margin: 20px;
 `;
 
