@@ -15,19 +15,21 @@ const OccupationProfile = forwardRef((props, ref) => {
 });
 
 const Container = styled.div`
+  max-width: 800px;
   display: flex;
   align-items: center;
+  justify-content: center;
   h1 {
-    width: 100px;
-    margin: 1rem;
+    width: 300px;
     text-align: center;
+    margin: 20px;
   }
 `;
 const JobContainer = styled.div`
+  width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin: 1rem;
+  margin: 20px;
 `;
 
 export default OccupationProfile;
