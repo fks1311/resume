@@ -40,10 +40,10 @@ const PageContainer = styled.div`
 const NewProfileBtn = styled(motion.div)`
   height: 32px;
   width: 800px;
-  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
   color: #f6f5f5;
   font-size: 18px;
   font-weight: bold;
