@@ -26,18 +26,12 @@ const CareerColumn = forwardRef((props, ref) => {
         <span>오늘날짜</span>
       </Date>
       <Content>
-        <h3>회사명</h3>
-        <h4>2024.07.10 ~ 2024.07.10</h4>
-        <h4>skill</h4>
-        <div>
-          경력기술서 우라라라라라나랄
-          <br />
-          경력기술서 ㄴㄹ머니아럼니ㅏㄻ니아러
-          <br />
-          경력기술서 ㅋㅍ,킆,대개개ㅏㄴㅇ라ㅓㄴㅁ라ㅓㅏㅓ
-          <br />
-          경력기술서 ㅁㄹㄻ닐앚대ㅑ겨밷겹ㅈ갸ㅐㅕ
-        </div>
+        <Company>
+          <h3>회사명</h3>
+          <h4>2024.07.10 ~ 2024.07.10</h4>
+          <h4>skill</h4>
+        </Company>
+        <textarea value={value || ""} onChange={handlerInput} />
       </Content>
     </Container>
   );
@@ -64,13 +58,15 @@ const Dot = styled.div`
 `;
 const VLine = styled.div`
   // height: ${({ $vHeight }) => $vHeight}px;
-  height: 40px;
+  height: 120px;
   border-left: 3px solid #478ccf;
 `;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+`;
+const Company = styled.div`
   h3 {
     font-size: 20px;
     font-weight: 600;
@@ -79,6 +75,7 @@ const Content = styled.div`
     font-size: 16px;
   }
 `;
+
 const Content2 = styled.textarea`
   // width: 550px;
   // padding: 5px;

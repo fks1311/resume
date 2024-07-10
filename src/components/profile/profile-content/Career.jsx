@@ -48,7 +48,7 @@ const Container = styled.div`
 const CareerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  // gap: 0.5rem;
 `;
 const Button = styled.div`
   // width: 80px;
