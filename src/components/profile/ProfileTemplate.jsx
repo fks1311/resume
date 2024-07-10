@@ -5,6 +5,7 @@ import EssentialInfoProfile from "components/profile/profile-content/EssentialIn
 import OccupationProfile from "components/profile/profile-content/OccupationProfile";
 import UsableSkill from "components/profile/profile-content/UsableSkill";
 import SimpleIntroduce from "./profile-content/SimpleIntroduce";
+import Career from "./profile-content/Career";
 
 const ProfileTemplate = forwardRef(({ children }, ref) => {
   const {
@@ -20,6 +21,7 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
       <SimpleIntroduce />
       <OccupationProfile />
       <UsableSkill />
+      <Career />
     </ViewContainer>
   );
 });

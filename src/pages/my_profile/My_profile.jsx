@@ -6,11 +6,21 @@ import DefaultPage from "components/global/DefaultPage";
 export default function My_profile() {
   const navigate = useNavigate();
   const pf_list = [1];
+  const variants = {
+    show: {
+      scale: 1.1,
+    },
+  };
 
   return (
     <DefaultPage>
       <PageContainer>
-        <NewProfileBtn onClick={() => navigate(`/profiles/me`)}>
+        <NewProfileBtn
+          variants={variants}
+          initial={false}
+          whileHover="show"
+          onClick={() => navigate(`/profiles/me`)}
+        >
           새로운 프로필 생성
         </NewProfileBtn>
         {pf_list.length !== 0 &&
@@ -39,5 +49,6 @@ const NewProfileBtn = styled(motion.div)`
   font-weight: bold;
   background-color: #478ccf;
   border-radius: 10px;
+  cursor: pointer;
 `;
 const ProfileList = styled.div``;

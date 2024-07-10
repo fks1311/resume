@@ -1,6 +1,6 @@
-import HashTagWrap from "components/form/HashTagWrap";
 import { forwardRef } from "react";
 import { styled } from "styled-components";
+import HashTagWrap from "components/form/HashTagWrap";
 
 const UsableSkill = forwardRef((props, ref) => {
   return (

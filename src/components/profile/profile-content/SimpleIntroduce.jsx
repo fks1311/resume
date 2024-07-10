@@ -15,7 +15,7 @@ const SimpleIntroduce = forwardRef((props, ref) => {
   }, [value]);
 
   return (
-    <Container>
+    <Container className="introduce">
       <h1>간단 소개</h1>
       <ContentContainer>
         <TextArea ref={curRef} value={value} rows={1} onChange={handlerInput} />
