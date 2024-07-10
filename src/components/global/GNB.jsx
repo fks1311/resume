@@ -8,11 +8,11 @@ export default function GlobalNavigation() {
   return (
     <PageContainer>
       <Header>
-        <div onClick={() => navigate("/")}>Hi</div>
+        <Nav onClick={() => navigate("/")}>Hi</Nav>
         {nav.map((n, idx) => (
-          <div key={idx} onClick={() => navigate(`/${n}`)}>
+          <Nav key={idx} onClick={() => navigate(`/${n}`)}>
             {n}
-          </div>
+          </Nav>
         ))}
       </Header>
       <Outlet />
@@ -35,4 +35,8 @@ const Header = styled.header`
   max-width: 1200px;
   height: 65px;
   cursor: pointer;
+`;
+
+const Nav = styled.div`
+  padding: 5px 20px;
 `;
