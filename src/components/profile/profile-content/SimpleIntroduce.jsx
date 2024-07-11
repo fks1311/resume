@@ -25,10 +25,11 @@ const SimpleIntroduce = forwardRef((props, ref) => {
 });
 
 const Container = styled.div`
-  max-width: 800px;
+  // max-width: 800px;
   display: flex;
   align-items: center;
   // justify-content: center;
+  border-bottom: 1px solid #f6f5f5;
   h1 {
     width: 150px;
     margin: 20px;

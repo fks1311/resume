@@ -27,9 +27,10 @@ const EssentialInfoProfile = forwardRef(({ children }, ref) => {
 });
 
 const Container = styled.div`
-  max-width: 800px;
+  // max-width: 800px;
   display: flex;
   // justify-content: center;
+  border-bottom: 1px solid #f6f5f5;
 `;
 const BasicInfoInput = styled.div`
   width: 400px;

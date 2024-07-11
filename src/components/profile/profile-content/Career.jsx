@@ -27,10 +27,10 @@ const Career = forwardRef(() => {
 });
 
 const ViewContainer = styled.div`
-  max-width: 800px;
+  // max-width: 800px;
   display: flex;
-  align-items: center;
-  // justify-content: center;
+  align-items: flex-start;
+  border-bottom: 1px solid #f6f5f5;
   h1 {
     width: 150px;
     margin: 20px;

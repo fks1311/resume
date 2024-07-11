@@ -5,7 +5,7 @@ const CareerColumn = forwardRef((props, ref) => {
   const { length } = props;
 
   const rowRef = useRef();
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
   const [vl, setVl] = useState();
 
   const handlerInput = (e) => {
@@ -13,7 +13,7 @@ const CareerColumn = forwardRef((props, ref) => {
   };
 
   useEffect(() => {
-    rowRef.current.style.height = "auto";
+    rowRef.current.style.height = "0";
     rowRef.current.style.height = rowRef.current.scrollHeight + "px";
     setVl(rowRef.current.getBoundingClientRect().height + 105);
   }, [value]);
@@ -42,7 +42,7 @@ const CareerColumn = forwardRef((props, ref) => {
 
 const Container = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
 `;
 
 const Date = styled.div`
@@ -85,6 +85,7 @@ const Company = styled.div`
 `;
 
 const Rows = styled.textarea`
+  padding: 0px 0px 8px 0px;
   resize: none;
   outline: none;
   border: none;

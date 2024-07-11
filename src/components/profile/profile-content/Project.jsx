@@ -16,7 +16,7 @@ const Project = forwardRef((props, ref) => {
       <h1>프로젝트</h1>
       <ProjectContainer>
         {list.map((_, idx) => (
-          <ProjectColumn key={idx} />
+          <ProjectColumn key={idx} length={list.length} />
         ))}
         <Button onClick={addProject}>프로젝트 추가하기</Button>
       </ProjectContainer>
@@ -25,9 +25,9 @@ const Project = forwardRef((props, ref) => {
 });
 
 const Container = styled.div`
-  max-width: 800px;
+  // max-width: 800px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   h1 {
     width: 150px;
     margin: 20px;
