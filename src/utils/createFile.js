@@ -1,4 +1,4 @@
-// Github file upload
+// Github file upload example
 
 export default async function createFile() {
   const token = `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`;
@@ -29,4 +29,22 @@ export default async function createFile() {
   } catch (error) {
     console.error("Error creating file: ", error);
   }
+
+  return (
+    <div className="App">
+      <h1>Create File in GitHub</h1>
+      <input
+        type="text"
+        placeholder="File name"
+        value={fileName}
+        onChange={(e) => setFileName(e.target.value)}
+      />
+      <textarea
+        placeholder="File content"
+        value={fileContent}
+        onChange={(e) => setFileContent(e.target.value)}
+      />
+      <button onClick={handleCreateFile}>Create File</button>
+    </div>
+  );
 }

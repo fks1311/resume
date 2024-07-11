@@ -4,7 +4,7 @@ import CareerColumn from "components/form/CareerColumn";
 
 const Career = forwardRef(() => {
   const [count, setCount] = useState(0);
-  const [histories, setHistories] = useState([]);
+  const [histories, setHistories] = useState([1]);
 
   const addCareer = (e) => {
     setCount((c) => c + 1);
@@ -51,7 +51,7 @@ const CareerContainer = styled.div`
   // gap: 0.5rem;
 `;
 const Button = styled.div`
-  // width: 80px;
+  width: 550px;
   padding: 8px 12px;
   color: #f6f5f5;
   font-size: 14px;

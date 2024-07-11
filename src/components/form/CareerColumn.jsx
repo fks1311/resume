@@ -4,7 +4,6 @@ import { styled } from "styled-components";
 const CareerColumn = forwardRef((props, ref) => {
   const { length } = props;
 
-  const containerRef = useRef();
   const rowRef = useRef();
   const [value, setValue] = useState();
   const [vl, setVl] = useState();
@@ -29,7 +28,7 @@ const CareerColumn = forwardRef((props, ref) => {
         <span>2024-07</span>
         <span>오늘날짜</span>
       </Date>
-      <Content className="content" ref={containerRef}>
+      <Content className="content">
         <Company>
           <input placeholder="회사명" />
           <input placeholder="근무기간" />

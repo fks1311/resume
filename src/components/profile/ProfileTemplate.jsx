@@ -6,6 +6,7 @@ import OccupationProfile from "components/profile/profile-content/OccupationProf
 import UsableSkill from "components/profile/profile-content/UsableSkill";
 import SimpleIntroduce from "./profile-content/SimpleIntroduce";
 import Career from "./profile-content/Career";
+import Project from "./profile-content/Project";
 
 const ProfileTemplate = forwardRef(({ children }, ref) => {
   const {
@@ -22,6 +23,7 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
       <OccupationProfile />
       <UsableSkill />
       <Career />
+      <Project />
     </ViewContainer>
   );
 });
@@ -31,7 +33,6 @@ const ViewContainer = styled.form`
   max-width: 820px;
   display: flex;
   flex-direction: column;
-  // align-items: center;
   padding: 1rem;
   border: 1px solid #eeedeb;
   border-radius: 10px;
