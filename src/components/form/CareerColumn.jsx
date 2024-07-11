@@ -4,34 +4,38 @@ import { styled } from "styled-components";
 const CareerColumn = forwardRef((props, ref) => {
   const { length } = props;
 
-  const [vHeight, setVHeight] = useState();
+  const containerRef = useRef();
+  const rowRef = useRef();
   const [value, setValue] = useState();
+  const [vl, setVl] = useState();
 
   const handlerInput = (e) => {
     setValue(e.target.value);
   };
 
   useEffect(() => {
-    // setVHeight(vhRef.current.scrollHeight);
+    rowRef.current.style.height = "auto";
+    rowRef.current.style.height = rowRef.current.scrollHeight + "px";
+    setVl(rowRef.current.getBoundingClientRect().height + 105);
   }, [value]);
 
   return (
     <Container>
-      <Date>
+      <Date className="date">
         <DotContainer>
           <Dot />
-          {length >= 2 && <VLine $vHeight={vHeight} length={length} />}
+          {length >= 2 && <VLine vl={vl} />}
         </DotContainer>
         <span>2024-07</span>
         <span>오늘날짜</span>
       </Date>
-      <Content>
+      <Content className="content" ref={containerRef}>
         <Company>
           <input placeholder="회사명" />
           <input placeholder="근무기간" />
           <input placeholder="사용스킬" />
         </Company>
-        <Rows value={value || ""} onChange={handlerInput} />
+        <Rows ref={rowRef} value={value || ""} onChange={handlerInput} />
       </Content>
     </Container>
   );
@@ -58,8 +62,7 @@ const Dot = styled.div`
   border: 3px solid #478ccf;
 `;
 const VLine = styled.div`
-  // height: ${({ $vHeight }) => $vHeight}px;
-  height: 120px;
+  height: ${({ vl }) => vl}px;
   border-left: 3px solid #478ccf;
 `;
 
@@ -69,26 +72,24 @@ const Content = styled.div`
   gap: 0.3rem;
 `;
 const Company = styled.div`
+  height: 105px;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   input {
     width: 400px;
-    // padding: 5px;
+    padding: 0px 0px 8px 0px;
     outline: none;
     border: none;
     border-bottom: 1px solid #eeedeb;
   }
 `;
-const Rows = styled.textarea``;
 
-const Content2 = styled.textarea`
-  // width: 550px;
-  // padding: 5px;
-  // line-height: 1.5;
-  resize: none; // 크기 조절 없애기
-  outline: none; // 클릭 시, 테두리 없애기
-  border: none; // 테두리 없애기
-  border-bottom: 1px solid #478ccf;
+const Rows = styled.textarea`
+  resize: none;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #eeedeb;
 `;
 
 export default CareerColumn;
