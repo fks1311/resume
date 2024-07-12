@@ -14,9 +14,14 @@ import getFile from "utils/getFile";
 const ProfileTemplate = forwardRef(({ children }, ref) => {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: [{ name: "" }],
+    },
+  });
 
   const onValid = (data) => {
     console.log("valid >> ", data);
@@ -29,9 +34,13 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
       className="profile"
       onSubmit={handleSubmit(onValid, onInValid)}
     >
-      <EssentialInfoProfile register={register} errors={errors} />
-      <SimpleIntroduce register={register} errors={errors} />
-      {/* <OccupationProfile register={register} errors={errors} /> */}
+      {/* <EssentialInfoProfile register={register} errors={errors} />
+      <SimpleIntroduce register={register} errors={errors} /> */}
+      <OccupationProfile
+        register={register}
+        control={control}
+        errors={errors}
+      />
       {/* <UsableSkill register={register} errors={errors} /> */}
       {/* <Career register={register} errors={errors} /> */}
       {/* <Project register={register} errors={errors} /> */}

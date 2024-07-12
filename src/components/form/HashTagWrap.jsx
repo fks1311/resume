@@ -1,15 +1,24 @@
 import { useState, useCallback, forwardRef } from "react";
+import { Controller, useFieldArray } from "react-hook-form";
 import { styled } from "styled-components";
 
 const HashTagWrap = forwardRef((props, ref) => {
+  const { register, control, placeholder, ...rest } = props;
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
+    {
+      control,
+      name: "email",
+    }
+  );
   const [hashtagArray, setHashtagArray] = useState([]);
   const [value, setValue] = useState("");
-  const { placeholder } = props;
 
   const handlerTag = (e) => {
     setValue(e.target.value);
   };
 
+  // e.key === "Enter"
+  // e.key === " " || e.code === "Space" || e.keyCode === 32
   const handleEnterKeyPress = useCallback(
     (e) => {
       if (e.key === "Enter") {
@@ -18,6 +27,8 @@ const HashTagWrap = forwardRef((props, ref) => {
         if (trimmedValue !== "") {
           setHashtagArray((prev) => [...prev, trimmedValue]);
           setValue("");
+          // e.preventDefault();
+          // append({ email: "" });
         }
       }
     },
@@ -31,12 +42,24 @@ const HashTagWrap = forwardRef((props, ref) => {
           <HashTag key={idx}>{tag}</HashTag>
         ))}
       </HashWrap>
-      <HashInput
-        value={value || ""}
-        placeholder={placeholder}
-        onKeyUp={handleEnterKeyPress}
-        onChange={handlerTag}
-      />
+      {fields.map((field, idx) => {
+        return (
+          <li key={field.id}>
+            <HashInput
+              {...register(`email.${idx}.value`)}
+              value={value || ""}
+              placeholder={placeholder}
+              onKeyUp={handleEnterKeyPress}
+              onChange={handlerTag}
+            />
+            <Controller
+              render={({ field }) => <input {...field} />}
+              name={`test.${idx}.lastName`}
+              control={control}
+            />
+          </li>
+        );
+      })}
     </Container>
   );
 });
@@ -67,5 +90,7 @@ const HashInput = styled.input`
   border: none;
   border-bottom: 1px solid #eeedeb;
 `;
+
+const Input = styled.input``;
 
 export default HashTagWrap;

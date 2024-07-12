@@ -3,12 +3,22 @@ import { styled } from "styled-components";
 import HashTagWrap from "components/form/HashTagWrap";
 
 const OccupationProfile = forwardRef((props, ref) => {
+  const { register, control, errors } = props;
+
   return (
-    <Container className="occupation">
+    <Container>
       <h1>직군 및 직무</h1>
       <JobContainer>
-        <HashTagWrap placeholder={"직군 태그를 입력하세요"} />
-        <HashTagWrap placeholder={"직무 태그를 입력하세요"} />
+        <HashTagWrap
+          id="ocu"
+          register={register}
+          control={control}
+          placeholder={"직군 태그를 입력하세요"}
+        />
+        {/* <HashTagWrap
+          register={register}
+          placeholder={"직무 태그를 입력하세요"}
+        /> */}
       </JobContainer>
     </Container>
   );
