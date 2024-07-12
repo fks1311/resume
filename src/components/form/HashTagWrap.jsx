@@ -23,13 +23,15 @@ const HashTagWrap = forwardRef((props, ref) => {
     (e) => {
       if (e.key === "Enter") {
         // 한글 입력 시, 마지막 글자 입력 + 공백 에러 처리
-        const trimmedValue = value.trim();
-        if (trimmedValue !== "") {
-          setHashtagArray((prev) => [...prev, trimmedValue]);
-          setValue("");
-          // e.preventDefault();
-          // append({ email: "" });
-        }
+        // const trimmedValue = value.trim();
+        // if (trimmedValue !== "") {
+        //   setHashtagArray((prev) => [...prev, trimmedValue]);
+        //   setValue("");
+        //   e.preventDefault();
+        //   append({ email: "" });
+        // }
+        e.preventDefault();
+        append({ email: "" });
       }
     },
     [value]
@@ -42,21 +44,19 @@ const HashTagWrap = forwardRef((props, ref) => {
           <HashTag key={idx}>{tag}</HashTag>
         ))}
       </HashWrap>
-      {fields.map((field, idx) => {
+      {fields.map((field, index) => {
         return (
           <li key={field.id}>
-            <HashInput
-              {...register(`email.${idx}.value`)}
-              value={value || ""}
-              placeholder={placeholder}
+            <input
+              {...register(`email.${index}.name`, { required: true })}
               onKeyUp={handleEnterKeyPress}
-              onChange={handlerTag}
             />
-            <Controller
+
+            {/* <Controller
               render={({ field }) => <input {...field} />}
-              name={`test.${idx}.lastName`}
+              name={`test.${index}.lastName`}
               control={control}
-            />
+            /> */}
           </li>
         );
       })}
