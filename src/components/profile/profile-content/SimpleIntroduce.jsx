@@ -2,6 +2,8 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const SimpleIntroduce = forwardRef((props, ref) => {
+  const { register, errors } = props;
+
   const [value, setValue] = useState();
   const curRef = useRef();
 
@@ -18,7 +20,7 @@ const SimpleIntroduce = forwardRef((props, ref) => {
     <Container className="introduce">
       <h1>간단 소개</h1>
       <ContentContainer>
-        <TextArea ref={curRef} value={value} rows={1} onChange={handlerInput} />
+        <TextArea ref={curRef} value={value} onChange={handlerInput} />
       </ContentContainer>
     </Container>
   );

@@ -7,6 +7,7 @@ import UsableSkill from "components/profile/profile-content/UsableSkill";
 import SimpleIntroduce from "./profile-content/SimpleIntroduce";
 import Career from "./profile-content/Career";
 import Project from "./profile-content/Project";
+import createFile from "utils/createFile";
 
 const ProfileTemplate = forwardRef(({ children }, ref) => {
   const {
@@ -16,20 +17,21 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
   } = useForm();
 
   const onValid = (data) => {
-    console.group("실행");
-    console.log(data);
-    console.groupEnd();
+    createFile("me", data);
   };
   const onInValid = (errors) => console.log("실패", errors);
 
   return (
-    <ViewContainer onSubmit={handleSubmit(onValid, onInValid)}>
+    <ViewContainer
+      className="profile"
+      onSubmit={handleSubmit(onValid, onInValid)}
+    >
       <EssentialInfoProfile register={register} errors={errors} />
-      {/* <SimpleIntroduce register={register} errors={errors} />
-      <OccupationProfile register={register} errors={errors} />
-      <UsableSkill register={register} errors={errors} />
-      <Career register={register} errors={errors} />
-      <Project register={register} errors={errors} /> */}
+      {/* <SimpleIntroduce register={register} errors={errors} /> */}
+      {/* <OccupationProfile register={register} errors={errors} /> */}
+      {/* <UsableSkill register={register} errors={errors} /> */}
+      {/* <Career register={register} errors={errors} /> */}
+      {/* <Project register={register} errors={errors} /> */}
       <Button>저장하기</Button>
     </ViewContainer>
   );
