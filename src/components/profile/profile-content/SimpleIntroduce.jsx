@@ -1,36 +1,38 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useState, forwardRef } from "react";
 import styled from "styled-components";
 
-const SimpleIntroduce = forwardRef((props, ref) => {
-  const { register, errors } = props;
-
-  const [value, setValue] = useState();
-  const curRef = useRef();
+const SimpleIntroduce = forwardRef(({ register, errors, ...rest }, ref) => {
+  const [value, setValue] = useState("");
 
   const handlerInput = (e) => {
+    const vertical = document.getElementById("introduce");
     setValue(e.target.value);
+    vertical.style.height = "auto";
+    vertical.style.height = vertical.scrollHeight + "px";
   };
 
-  useEffect(() => {
-    curRef.current.style.height = "auto";
-    curRef.current.style.height = curRef.current.scrollHeight + "px";
-  }, [value]);
-
   return (
-    <Container className="introduce">
+    <Container>
       <h1>간단 소개</h1>
       <ContentContainer>
-        <TextArea ref={curRef} value={value} onChange={handlerInput} />
+        <TextArea
+          id="introduce"
+          {...register("introduce")}
+          {...rest}
+          value={value}
+          rows={1}
+          onChange={handlerInput}
+        />
       </ContentContainer>
     </Container>
   );
 });
 
+export default SimpleIntroduce;
+
 const Container = styled.div`
-  // max-width: 800px;
   display: flex;
   align-items: center;
-  // justify-content: center;
   border-bottom: 1px solid #f6f5f5;
   h1 {
     width: 150px;
@@ -45,12 +47,8 @@ const ContentContainer = styled.div`
 `;
 const TextArea = styled.textarea`
   width: 550px;
-  padding: 5px;
-  line-height: 1.5;
   resize: none; // 크기 조절 없애기
   outline: none; // 클릭 시, 테두리 없애기
   border: none; // 테두리 없애기
   border-bottom: 1px solid #eeedeb;
 `;
-
-export default SimpleIntroduce;

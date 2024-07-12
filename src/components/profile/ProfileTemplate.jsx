@@ -1,13 +1,15 @@
 import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { styled } from "styled-components";
+
 import EssentialInfoProfile from "components/profile/profile-content/EssentialInfoProfile";
+import SimpleIntroduce from "components/profile/profile-content/SimpleIntroduce";
 import OccupationProfile from "components/profile/profile-content/OccupationProfile";
 import UsableSkill from "components/profile/profile-content/UsableSkill";
-import SimpleIntroduce from "./profile-content/SimpleIntroduce";
-import Career from "./profile-content/Career";
-import Project from "./profile-content/Project";
+import Career from "components/profile/profile-content/Career";
+import Project from "components/profile/profile-content/Project";
 import createFile from "utils/createFile";
+import getFile from "utils/getFile";
 
 const ProfileTemplate = forwardRef(({ children }, ref) => {
   const {
@@ -17,7 +19,8 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
   } = useForm();
 
   const onValid = (data) => {
-    createFile("me", data);
+    console.log("valid >> ", data);
+    // createFile("me", data);
   };
   const onInValid = (errors) => console.log("실패", errors);
 
@@ -27,7 +30,7 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
       onSubmit={handleSubmit(onValid, onInValid)}
     >
       <EssentialInfoProfile register={register} errors={errors} />
-      {/* <SimpleIntroduce register={register} errors={errors} /> */}
+      <SimpleIntroduce register={register} errors={errors} />
       {/* <OccupationProfile register={register} errors={errors} /> */}
       {/* <UsableSkill register={register} errors={errors} /> */}
       {/* <Career register={register} errors={errors} /> */}

@@ -1,1 +1,0 @@
-{"user_name":"한글","user_phone":"01012341234","user_mail":"fks1311@gmail.com","user_github":"fks1311@gmail.com","user_blog":"fks1311@gmail.com"}
