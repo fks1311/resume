@@ -1,13 +1,14 @@
-import { useRef, forwardRef } from "react";
+import { forwardRef } from "react";
 import { styled } from "styled-components";
 
+// ref : register 함수
+// rest : register 값
 const TextInput = forwardRef((props, ref) => {
-  const curRef = useRef(null);
-  const { placeholder } = props;
+  const { placeholder, ...rest } = props;
 
   return (
     <Container>
-      <Input placeholder={placeholder ?? undefined} />
+      <Input ref={ref} {...rest} placeholder={placeholder ?? undefined} />
     </Container>
   );
 });
