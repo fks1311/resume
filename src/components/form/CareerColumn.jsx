@@ -1,8 +1,9 @@
 import { useEffect, useState, useRef, forwardRef } from "react";
 import { styled } from "styled-components";
+import RenderSkill from "./RenderSkill";
 
 const CareerColumn = forwardRef((props, ref) => {
-  const { register, idx, length } = props;
+  const { register, control, idx, length } = props;
 
   const rowRef = useRef();
   const [value, setValue] = useState("");
@@ -40,10 +41,11 @@ const CareerColumn = forwardRef((props, ref) => {
       <Content className="content">
         <Company>
           <input {...register(`career.${idx}.office`)} placeholder="회사명" />
-          <input
-            {...register(`career.${idx}.use_skill`)}
+          <RenderSkill idx={idx} register={register} control={control} />
+          {/* <input
+            {...register(`career.${idx}.use_skill.${idx}`)}
             placeholder="사용스킬"
-          />
+          /> */}
         </Company>
         <Rows
           ref={rowRef}
@@ -105,9 +107,6 @@ const Company = styled.div`
     border-bottom: 1px solid #eeedeb;
   }
 `;
-
-const HashTagWrap = styled.div``;
-const HashTag = styled.div``;
 
 const Rows = styled.textarea`
   // padding: 0px 0px 8px 0px;

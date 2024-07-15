@@ -33,6 +33,7 @@ const Career = forwardRef((props, ref) => {
                 key={field.id}
                 idx={idx}
                 register={register}
+                control={control}
                 length={histories.length}
               />
             );
