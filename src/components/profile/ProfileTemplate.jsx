@@ -22,12 +22,12 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      career: [{ period: "", office: "", use_skill: [], text: "" }],
+      career: [{ start_period: "", end_period: "", office: "", use_skill: [] }],
     },
   });
 
   const onValid = (data) => {
-    console.log(">>>", data);
+    console.log("onValid >>>", data);
     // setUserInfo((prev) => ({
     //   ...prev,
     //   ...data,

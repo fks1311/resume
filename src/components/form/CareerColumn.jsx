@@ -1,14 +1,8 @@
 import { useEffect, useState, useRef, forwardRef } from "react";
-import { useFieldArray } from "react-hook-form";
 import { styled } from "styled-components";
 
 const CareerColumn = forwardRef((props, ref) => {
-  const { register, control, length } = props;
-  const { fields, append, prepend, remove, swap, move, insert, replace } =
-    useFieldArray({
-      control,
-      name: "career",
-    });
+  const { register, idx, length } = props;
 
   const rowRef = useRef();
   const [value, setValue] = useState("");
@@ -25,69 +19,42 @@ const CareerColumn = forwardRef((props, ref) => {
   }, [value]);
 
   return (
-    <Column>
-      {fields.map((field, idx) => {
-        return (
-          <li key={field.id}>
-            <Date>
-              <DotContainer>
-                <Dot />
-                {length >= 2 && <VLine vl={vl} />}
-              </DotContainer>
-              <input
-                {...register(`career.${idx}.period`)}
-                placeholder="근무기간"
-              />
-            </Date>
-            <Content>
-              <Company>
-                <input
-                  {...register(`career.${idx}.office`)}
-                  placeholder="회사명"
-                />
-                <input
-                  {...register(`career.${idx}.use_skill`)}
-                  placeholder="사용 기술"
-                />
-              </Company>
-              <Rows
-                ref={rowRef}
-                value={value || ""}
-                placeholder="간단"
-                onChange={handlerInput}
-              />
-            </Content>
-          </li>
-        );
-      })}
-    </Column>
-    // <Container>
-    //   <Date className="date">
-    //     <DotContainer>
-    //       <Dot />
-    //       {length >= 2 && <VLine vl={vl} />}
-    //     </DotContainer>
-    //     <span>2024-07</span>
-    //     <span>오늘날짜</span>
-    //   </Date>
-    //   <Content className="content">
-    //     <Company>
-    //       <input placeholder="회사명" />
-    //       <input placeholder="근무기간" />
-    //       <input placeholder="사용스킬" />
-    //     </Company>
-    //     <Rows ref={rowRef} value={value || ""} onChange={handlerInput} />
-    //   </Content>
-    // </Container>
+    <Container>
+      <Date className="date">
+        <DotContainer>
+          <Dot />
+          {length >= 2 && <VLine vl={vl} />}
+        </DotContainer>
+        <input
+          {...register(`career.${idx}.start_period`)}
+          type="date"
+          placeholder="기간"
+        />
+        ~
+        <input
+          {...register(`career.${idx}.end_period`)}
+          type="date"
+          placeholder="기간"
+        />
+      </Date>
+      <Content className="content">
+        <Company>
+          <input {...register(`career.${idx}.office`)} placeholder="회사명" />
+          <input
+            {...register(`career.${idx}.use_skill`)}
+            placeholder="사용스킬"
+          />
+        </Company>
+        <Rows
+          ref={rowRef}
+          value={value || ""}
+          placeholder="기술 이력"
+          onChange={handlerInput}
+        />
+      </Content>
+    </Container>
   );
 });
-
-const Column = styled.ul`
-  li {
-    display: flex;
-    gap: 1.5rem;
-  }
-`;
 
 const Container = styled.div`
   display: flex;
@@ -97,9 +64,8 @@ const Container = styled.div`
 const Date = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 0.3rem;
+  gap: 0.5rem;
   input {
-    // width: 400px;
     padding: 0px 0px 8px 0px;
     outline: none;
     border: none;
@@ -125,10 +91,9 @@ const VLine = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 1rem;
 `;
 const Company = styled.div`
-  height: 105px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -141,8 +106,11 @@ const Company = styled.div`
   }
 `;
 
+const HashTagWrap = styled.div``;
+const HashTag = styled.div``;
+
 const Rows = styled.textarea`
-  padding: 0px 0px 8px 0px;
+  // padding: 0px 0px 8px 0px;
   resize: none;
   outline: none;
   border: none;
