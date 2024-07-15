@@ -1,8 +1,14 @@
 import { useEffect, useState, useRef, forwardRef } from "react";
+import { useFieldArray } from "react-hook-form";
 import { styled } from "styled-components";
 
 const CareerColumn = forwardRef((props, ref) => {
-  const { length } = props;
+  const { register, control, length } = props;
+  const { fields, append, prepend, remove, swap, move, insert, replace } =
+    useFieldArray({
+      control,
+      name: "career",
+    });
 
   const rowRef = useRef();
   const [value, setValue] = useState("");
@@ -19,26 +25,69 @@ const CareerColumn = forwardRef((props, ref) => {
   }, [value]);
 
   return (
-    <Container>
-      <Date className="date">
-        <DotContainer>
-          <Dot />
-          {length >= 2 && <VLine vl={vl} />}
-        </DotContainer>
-        <span>2024-07</span>
-        <span>오늘날짜</span>
-      </Date>
-      <Content className="content">
-        <Company>
-          <input placeholder="회사명" />
-          <input placeholder="근무기간" />
-          <input placeholder="사용스킬" />
-        </Company>
-        <Rows ref={rowRef} value={value || ""} onChange={handlerInput} />
-      </Content>
-    </Container>
+    <Column>
+      {fields.map((field, idx) => {
+        return (
+          <li key={field.id}>
+            <Date>
+              <DotContainer>
+                <Dot />
+                {length >= 2 && <VLine vl={vl} />}
+              </DotContainer>
+              <input
+                {...register(`career.${idx}.period`)}
+                placeholder="근무기간"
+              />
+            </Date>
+            <Content>
+              <Company>
+                <input
+                  {...register(`career.${idx}.office`)}
+                  placeholder="회사명"
+                />
+                <input
+                  {...register(`career.${idx}.use_skill`)}
+                  placeholder="사용 기술"
+                />
+              </Company>
+              <Rows
+                ref={rowRef}
+                value={value || ""}
+                placeholder="간단"
+                onChange={handlerInput}
+              />
+            </Content>
+          </li>
+        );
+      })}
+    </Column>
+    // <Container>
+    //   <Date className="date">
+    //     <DotContainer>
+    //       <Dot />
+    //       {length >= 2 && <VLine vl={vl} />}
+    //     </DotContainer>
+    //     <span>2024-07</span>
+    //     <span>오늘날짜</span>
+    //   </Date>
+    //   <Content className="content">
+    //     <Company>
+    //       <input placeholder="회사명" />
+    //       <input placeholder="근무기간" />
+    //       <input placeholder="사용스킬" />
+    //     </Company>
+    //     <Rows ref={rowRef} value={value || ""} onChange={handlerInput} />
+    //   </Content>
+    // </Container>
   );
 });
+
+const Column = styled.ul`
+  li {
+    display: flex;
+    gap: 1.5rem;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -47,7 +96,15 @@ const Container = styled.div`
 
 const Date = styled.div`
   display: flex;
+  align-items: flex-start;
   gap: 0.3rem;
+  input {
+    // width: 400px;
+    padding: 0px 0px 8px 0px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #eeedeb;
+  }
 `;
 const DotContainer = styled.div`
   display: flex;

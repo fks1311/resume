@@ -1,14 +1,22 @@
 import { useState, forwardRef } from "react";
 import { styled } from "styled-components";
 import CareerColumn from "components/form/CareerColumn";
+import { useFieldArray } from "react-hook-form";
 
-const Career = forwardRef(() => {
+const Career = forwardRef((props, ref) => {
+  const { register, control, errprs } = props;
   const [count, setCount] = useState(0);
   const [histories, setHistories] = useState([1]);
+  const { fields, append, prepend, remove, swap, move, insert, replace } =
+    useFieldArray({
+      control,
+      name: "career",
+    });
 
   const addCareer = (e) => {
     setCount((c) => c + 1);
     setHistories((prev) => [...prev, count]);
+    append({ period: "", office: "", use_skill: [], text: "" });
   };
 
   return (
@@ -17,7 +25,12 @@ const Career = forwardRef(() => {
       <Container>
         <CareerContainer>
           {histories.map((_, idx) => (
-            <CareerColumn key={idx} length={histories.length} />
+            <CareerColumn
+              key={idx}
+              register={register}
+              control={control}
+              length={histories.length}
+            />
           ))}
         </CareerContainer>
         <Button onClick={addCareer}>경력 추가하기</Button>
