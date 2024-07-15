@@ -1,5 +1,7 @@
 import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { userInfoStateAtom } from "utils/atom";
 import { styled } from "styled-components";
 
 import EssentialInfoProfile from "components/profile/profile-content/EssentialInfoProfile";
@@ -12,20 +14,22 @@ import createFile from "utils/createFile";
 import getFile from "utils/getFile";
 
 const ProfileTemplate = forwardRef(({ children }, ref) => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoStateAtom);
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      email: [{ name: "" }],
-    },
+    defaultValues: {},
   });
 
   const onValid = (data) => {
-    console.log("valid >> ", data);
+    setUserInfo((prev) => ({
+      ...prev,
+      ...data,
+    }));
     // createFile("me", data);
+    console.log(userInfo);
   };
   const onInValid = (errors) => console.log("실패", errors);
 
@@ -34,13 +38,9 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
       className="profile"
       onSubmit={handleSubmit(onValid, onInValid)}
     >
-      {/* <EssentialInfoProfile register={register} errors={errors} />
-      <SimpleIntroduce register={register} errors={errors} /> */}
-      <OccupationProfile
-        register={register}
-        control={control}
-        errors={errors}
-      />
+      <EssentialInfoProfile register={register} errors={errors} />
+      <SimpleIntroduce register={register} errors={errors} />
+      <OccupationProfile register={register} errors={errors} />
       {/* <UsableSkill register={register} errors={errors} /> */}
       {/* <Career register={register} errors={errors} /> */}
       {/* <Project register={register} errors={errors} /> */}

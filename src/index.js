@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import router from "./Router";
@@ -16,7 +17,9 @@ const GlobalStyle = createGlobalStyle`
 
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <RouterProvider router={router} />
+    <RecoilRoot>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </RecoilRoot>
   </React.StrictMode>
 );
