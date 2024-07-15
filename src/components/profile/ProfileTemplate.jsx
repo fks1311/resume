@@ -41,7 +41,7 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
       <EssentialInfoProfile register={register} errors={errors} />
       <SimpleIntroduce register={register} errors={errors} />
       <OccupationProfile register={register} errors={errors} />
-      {/* <UsableSkill register={register} errors={errors} /> */}
+      <UsableSkill register={register} errors={errors} />
       {/* <Career register={register} errors={errors} /> */}
       {/* <Project register={register} errors={errors} /> */}
       <Button>저장하기</Button>
