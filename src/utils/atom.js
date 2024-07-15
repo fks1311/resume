@@ -5,6 +5,6 @@ export const userInfoStateAtom = atom({
   default: {
     occupation: [],
     job: [],
-    skill: [],
+    usable_skill: [],
   },
 });
