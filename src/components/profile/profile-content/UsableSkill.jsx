@@ -10,7 +10,7 @@ const UsableSkill = forwardRef((props, ref) => {
       <h1>기술 스택</h1>
       <SkillContainer>
         <HashTagWrap
-          id="skill"
+          id="usable_skill"
           register={register}
           placeholder={"사용 가능한 기술 태그를 입력하세요"}
         />
