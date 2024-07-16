@@ -22,7 +22,15 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      career: [{ start_period: "", end_period: "", office: "", use_skill: [] }],
+      career: [
+        {
+          start_period: "",
+          end_period: "",
+          office: "",
+          use_skill: [{ skill: "" }],
+          content: "",
+        },
+      ],
     },
   });
 
@@ -43,8 +51,8 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
       onSubmit={handleSubmit(onValid, onInValid)}
     >
       {/* <EssentialInfoProfile register={register} errors={errors} />
-      <SimpleIntroduce register={register} errors={errors} />
-      <OccupationProfile register={register} errors={errors} />
+      <SimpleIntroduce register={register} errors={errors} /> */}
+      {/* <OccupationProfile register={register} errors={errors} />
       <UsableSkill register={register} errors={errors} /> */}
       <Career register={register} control={control} errors={errors} />
       {/* <Project register={register} errors={errors} /> */}

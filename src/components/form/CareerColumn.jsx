@@ -1,26 +1,28 @@
-import { useEffect, useState, useRef, forwardRef } from "react";
+import { useState, useRef, forwardRef, useCallback } from "react";
 import { styled } from "styled-components";
 import RenderSkill from "./RenderSkill";
 
 const CareerColumn = forwardRef((props, ref) => {
   const { register, control, idx, length } = props;
 
+  const companyRef = useRef();
   const rowRef = useRef();
   const [value, setValue] = useState("");
   const [vl, setVl] = useState();
 
-  const handlerInput = (e) => {
-    setValue(e.target.value);
-  };
-
-  useEffect(() => {
+  const autoRowsHeight = useCallback((e, id) => {
+    id === "rows" && setValue(e.target.value);
     rowRef.current.style.height = "0";
     rowRef.current.style.height = rowRef.current.scrollHeight + "px";
-    setVl(rowRef.current.getBoundingClientRect().height + 105);
-  }, [value]);
+    setVl(
+      companyRef.current.getBoundingClientRect().height +
+        rowRef.current.scrollHeight +
+        10
+    );
+  }, []);
 
   return (
-    <Container>
+    <Container className="CareerColumn">
       <Date className="date">
         <DotContainer>
           <Dot />
@@ -39,19 +41,25 @@ const CareerColumn = forwardRef((props, ref) => {
         />
       </Date>
       <Content className="content">
-        <Company>
-          <input {...register(`career.${idx}.office`)} placeholder="회사명" />
-          <RenderSkill idx={idx} register={register} control={control} />
-          {/* <input
-            {...register(`career.${idx}.use_skill.${idx}`)}
-            placeholder="사용스킬"
-          /> */}
+        <Company ref={companyRef}>
+          <input
+            {...register(`career.${idx}.office`)}
+            placeholder="회사명"
+            style={{
+              width: "400px",
+            }}
+          />
+          <RenderSkill
+            idx={idx}
+            {...{ control, register }}
+            autoRowsHeight={autoRowsHeight}
+          />
         </Company>
         <Rows
           ref={rowRef}
           value={value || ""}
           placeholder="기술 이력"
-          onChange={handlerInput}
+          onChange={(e) => autoRowsHeight(e, "rows")}
         />
       </Content>
     </Container>
@@ -68,7 +76,8 @@ const Date = styled.div`
   align-items: flex-start;
   gap: 0.5rem;
   input {
-    padding: 0px 0px 8px 0px;
+    height: 26px;
+    // padding: 0px 0px 8px 0px;
     outline: none;
     border: none;
     border-bottom: 1px solid #eeedeb;
@@ -100,8 +109,8 @@ const Company = styled.div`
   flex-direction: column;
   gap: 1rem;
   input {
-    width: 400px;
-    padding: 0px 0px 8px 0px;
+    height: 26px;
+    // padding: 0px 0px 8px 0px;
     outline: none;
     border: none;
     border-bottom: 1px solid #eeedeb;

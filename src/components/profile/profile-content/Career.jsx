@@ -16,7 +16,13 @@ const Career = forwardRef((props, ref) => {
   const addCareer = (e) => {
     setCount((c) => c + 1);
     setHistories((prev) => [...prev, count]);
-    prepend({ start_period: "", end_period: "", office: "", use_skill: [] });
+    append({
+      start_period: "",
+      end_period: "",
+      office: "",
+      use_skill: [{ skill: "" }],
+      content: "",
+    });
   };
 
   return (
@@ -24,9 +30,6 @@ const Career = forwardRef((props, ref) => {
       <h1>경력</h1>
       <Container>
         <CareerContainer>
-          {/* {histories.map((_, idx) => (
-            <CareerColumn key={idx} length={histories.length} />
-          ))} */}
           {fields.map((field, idx) => {
             return (
               <CareerColumn
