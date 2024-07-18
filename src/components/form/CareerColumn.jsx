@@ -28,17 +28,25 @@ const CareerColumn = forwardRef((props, ref) => {
           <Dot />
           {length >= 2 && <VLine vl={vl} />}
         </DotContainer>
-        <input
-          {...register(`career.${idx}.start_period`)}
-          type="date"
-          placeholder="기간"
-        />
-        ~
-        <input
-          {...register(`career.${idx}.end_period`)}
-          type="date"
-          placeholder="기간"
-        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <input
+            {...register(`career.${idx}.start_period`)}
+            type="date"
+            placeholder="기간"
+          />
+          ~
+          <input
+            {...register(`career.${idx}.end_period`)}
+            type="date"
+            placeholder="기간"
+          />
+        </div>
       </Date>
       <Content className="content">
         <Company ref={companyRef}>
