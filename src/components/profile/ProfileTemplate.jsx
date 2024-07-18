@@ -1,5 +1,7 @@
 import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { userInfoStateAtom } from "utils/atom";
 import { styled } from "styled-components";
 
 import EssentialInfoProfile from "components/profile/profile-content/EssentialInfoProfile";
@@ -12,6 +14,7 @@ import createFile from "utils/createFile";
 import getFile from "utils/getFile";
 
 const ProfileTemplate = forwardRef(({ children }, ref) => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoStateAtom);
   const {
     register,
     control,
@@ -19,12 +22,25 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: [{ name: "" }],
+      career: [
+        {
+          start_period: "",
+          end_period: "",
+          office: "",
+          use_skill: [{ skill: "" }],
+          content: "",
+        },
+      ],
     },
   });
 
   const onValid = (data) => {
-    console.log("valid >> ", data);
+    console.log("onValid >>>", data);
+    // setUserInfo((prev) => ({
+    //   ...prev,
+    //   ...data,
+    // }));
+    // console.log(userInfo);
     // createFile("me", data);
   };
   const onInValid = (errors) => console.log("실패", errors);
@@ -36,13 +52,9 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
     >
       {/* <EssentialInfoProfile register={register} errors={errors} />
       <SimpleIntroduce register={register} errors={errors} /> */}
-      <OccupationProfile
-        register={register}
-        control={control}
-        errors={errors}
-      />
-      {/* <UsableSkill register={register} errors={errors} /> */}
-      {/* <Career register={register} errors={errors} /> */}
+      {/* <OccupationProfile register={register} errors={errors} />
+      <UsableSkill register={register} errors={errors} /> */}
+      <Career register={register} control={control} errors={errors} />
       {/* <Project register={register} errors={errors} /> */}
       <Button>저장하기</Button>
     </ViewContainer>

@@ -1,40 +1,66 @@
-import { useEffect, useState, useRef, forwardRef } from "react";
+import { useState, useRef, forwardRef, useCallback } from "react";
 import { styled } from "styled-components";
+import RenderSkill from "./RenderSkill";
 
 const CareerColumn = forwardRef((props, ref) => {
-  const { length } = props;
+  const { register, control, idx, length } = props;
 
+  const companyRef = useRef();
   const rowRef = useRef();
   const [value, setValue] = useState("");
   const [vl, setVl] = useState();
 
-  const handlerInput = (e) => {
-    setValue(e.target.value);
-  };
-
-  useEffect(() => {
+  const autoRowsHeight = useCallback((e, id) => {
+    id === "rows" && setValue(e.target.value);
     rowRef.current.style.height = "0";
     rowRef.current.style.height = rowRef.current.scrollHeight + "px";
-    setVl(rowRef.current.getBoundingClientRect().height + 105);
-  }, [value]);
+    setVl(
+      companyRef.current.getBoundingClientRect().height +
+        rowRef.current.scrollHeight +
+        10
+    );
+  }, []);
 
   return (
-    <Container>
+    <Container className="CareerColumn">
       <Date className="date">
         <DotContainer>
           <Dot />
           {length >= 2 && <VLine vl={vl} />}
         </DotContainer>
-        <span>2024-07</span>
-        <span>오늘날짜</span>
+        <input
+          {...register(`career.${idx}.start_period`)}
+          type="date"
+          placeholder="기간"
+        />
+        ~
+        <input
+          {...register(`career.${idx}.end_period`)}
+          type="date"
+          placeholder="기간"
+        />
       </Date>
       <Content className="content">
-        <Company>
-          <input placeholder="회사명" />
-          <input placeholder="근무기간" />
-          <input placeholder="사용스킬" />
+        <Company ref={companyRef}>
+          <input
+            {...register(`career.${idx}.office`)}
+            placeholder="회사명"
+            style={{
+              width: "400px",
+            }}
+          />
+          <RenderSkill
+            idx={idx}
+            {...{ control, register }}
+            autoRowsHeight={autoRowsHeight}
+          />
         </Company>
-        <Rows ref={rowRef} value={value || ""} onChange={handlerInput} />
+        <Rows
+          ref={rowRef}
+          value={value || ""}
+          placeholder="기술 이력"
+          onChange={(e) => autoRowsHeight(e, "rows")}
+        />
       </Content>
     </Container>
   );
@@ -47,7 +73,15 @@ const Container = styled.div`
 
 const Date = styled.div`
   display: flex;
-  gap: 0.3rem;
+  align-items: flex-start;
+  gap: 0.5rem;
+  input {
+    height: 26px;
+    // padding: 0px 0px 8px 0px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #eeedeb;
+  }
 `;
 const DotContainer = styled.div`
   display: flex;
@@ -68,16 +102,15 @@ const VLine = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 1rem;
 `;
 const Company = styled.div`
-  height: 105px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   input {
-    width: 400px;
-    padding: 0px 0px 8px 0px;
+    height: 26px;
+    // padding: 0px 0px 8px 0px;
     outline: none;
     border: none;
     border-bottom: 1px solid #eeedeb;
@@ -85,7 +118,7 @@ const Company = styled.div`
 `;
 
 const Rows = styled.textarea`
-  padding: 0px 0px 8px 0px;
+  // padding: 0px 0px 8px 0px;
   resize: none;
   outline: none;
   border: none;

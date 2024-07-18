@@ -1,15 +1,11 @@
 import { useState, useCallback, forwardRef } from "react";
-import { Controller, useFieldArray } from "react-hook-form";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { userInfoStateAtom } from "utils/atom";
 
 const HashTagWrap = forwardRef((props, ref) => {
-  const { register, control, placeholder, ...rest } = props;
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control,
-      name: "email",
-    }
-  );
+  const { register, id, placeholder, ...rest } = props;
+  const [userInfo, setUserInfo] = useRecoilState(userInfoStateAtom);
   const [hashtagArray, setHashtagArray] = useState([]);
   const [value, setValue] = useState("");
 
@@ -17,21 +13,20 @@ const HashTagWrap = forwardRef((props, ref) => {
     setValue(e.target.value);
   };
 
-  // e.key === "Enter"
-  // e.key === " " || e.code === "Space" || e.keyCode === 32
   const handleEnterKeyPress = useCallback(
     (e) => {
       if (e.key === "Enter") {
-        // 한글 입력 시, 마지막 글자 입력 + 공백 에러 처리
-        // const trimmedValue = value.trim();
-        // if (trimmedValue !== "") {
-        //   setHashtagArray((prev) => [...prev, trimmedValue]);
-        //   setValue("");
-        //   e.preventDefault();
-        //   append({ email: "" });
-        // }
         e.preventDefault();
-        append({ email: "" });
+        // 한글 입력 시, 마지막 글자 입력 + 공백 에러 처리
+        const trimmedValue = value.trim();
+        if (trimmedValue !== "") {
+          // setHashtagArray((prev) => [...prev, trimmedValue]);
+          setUserInfo((prev) => ({
+            ...prev,
+            [`${id}`]: [...(prev[id] || []), trimmedValue],
+          }));
+          setValue("");
+        }
       }
     },
     [value]
@@ -40,26 +35,16 @@ const HashTagWrap = forwardRef((props, ref) => {
   return (
     <Container>
       <HashWrap>
-        {hashtagArray.map((tag, idx) => (
+        {userInfo[id].map((tag, idx) => (
           <HashTag key={idx}>{tag}</HashTag>
         ))}
       </HashWrap>
-      {fields.map((field, index) => {
-        return (
-          <li key={field.id}>
-            <input
-              {...register(`email.${index}.name`, { required: true })}
-              onKeyUp={handleEnterKeyPress}
-            />
-
-            {/* <Controller
-              render={({ field }) => <input {...field} />}
-              name={`test.${index}.lastName`}
-              control={control}
-            /> */}
-          </li>
-        );
-      })}
+      <HashInput
+        value={value || ""}
+        placeholder={placeholder}
+        onKeyDown={handleEnterKeyPress}
+        onChange={handlerTag}
+      />
     </Container>
   );
 });
@@ -90,7 +75,5 @@ const HashInput = styled.input`
   border: none;
   border-bottom: 1px solid #eeedeb;
 `;
-
-const Input = styled.input``;
 
 export default HashTagWrap;
