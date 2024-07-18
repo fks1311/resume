@@ -24,9 +24,18 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
     defaultValues: {
       career: [
         {
+          office: "",
           start_period: "",
           end_period: "",
-          office: "",
+          use_skill: [{ skill: "" }],
+          content: "",
+        },
+      ],
+      project: [
+        {
+          subject: "",
+          start_period: "",
+          end_period: "",
           use_skill: [{ skill: "" }],
           content: "",
         },
@@ -50,12 +59,12 @@ const ProfileTemplate = forwardRef(({ children }, ref) => {
       className="profile"
       onSubmit={handleSubmit(onValid, onInValid)}
     >
-      {/* <EssentialInfoProfile register={register} errors={errors} />
-      <SimpleIntroduce register={register} errors={errors} /> */}
-      {/* <OccupationProfile register={register} errors={errors} />
-      <UsableSkill register={register} errors={errors} /> */}
+      {/* <EssentialInfoProfile register={register} errors={errors} /> */}
+      {/* <SimpleIntroduce register={register} errors={errors} /> */}
+      {/* <OccupationProfile register={register} errors={errors} /> */}
+      <UsableSkill register={register} errors={errors} />
       <Career register={register} control={control} errors={errors} />
-      {/* <Project register={register} errors={errors} /> */}
+      <Project register={register} control={control} errors={errors} />
       <Button>저장하기</Button>
     </ViewContainer>
   );

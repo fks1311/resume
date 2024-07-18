@@ -3,19 +3,19 @@ import { useFieldArray } from "react-hook-form";
 import { styled } from "styled-components";
 
 const RenderSkill = forwardRef((props, ref) => {
-  const { register, control, idx, autoRowsHeight } = props;
+  const { register, control, idx, name, autoRowsHeight } = props;
   const {
     fields: skillFields,
     append: appendSkill,
     remove: removeSkill,
   } = useFieldArray({
     control,
-    name: `career.${idx}.use_skill`,
+    name: `${name}.${idx}.use_skill`,
   });
 
   const handleEnterKeyPress = (e, idx, skillIndex) => {
     const documentName = document.getElementsByName(
-      `career.${idx}.use_skill.${skillIndex}.skill`
+      `${name}.${idx}.use_skill.${skillIndex}.skill`
     );
 
     if (e.key === "Enter") {
@@ -35,7 +35,7 @@ const RenderSkill = forwardRef((props, ref) => {
       {skillFields.map((skillField, skillIndex) => (
         <HashInput
           key={skillField.id}
-          {...register(`career.${idx}.use_skill.${skillIndex}.skill`)}
+          {...register(`${name}.${idx}.use_skill.${skillIndex}.skill`)}
           placeholder="사용스킬"
           onKeyDown={(e) => {
             handleEnterKeyPress(e, idx, skillIndex);

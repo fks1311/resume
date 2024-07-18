@@ -7,19 +7,18 @@ const Career = forwardRef((props, ref) => {
   const { register, control, errors } = props;
   const [count, setCount] = useState(0);
   const [histories, setHistories] = useState([1]);
-  const { fields, append, prepend, remove, swap, move, insert, replace } =
-    useFieldArray({
-      control,
-      name: "career",
-    });
+  const { fields, append } = useFieldArray({
+    control,
+    name: "career",
+  });
 
   const addCareer = (e) => {
     setCount((c) => c + 1);
     setHistories((prev) => [...prev, count]);
     append({
+      office: "",
       start_period: "",
       end_period: "",
-      office: "",
       use_skill: [{ skill: "" }],
       content: "",
     });

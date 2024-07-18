@@ -1,23 +1,44 @@
-import ProjectColumn from "components/form/ProjectColumn";
-import { styled } from "styled-components";
 import { useState, forwardRef } from "react";
+import { useFieldArray } from "react-hook-form";
+import { styled } from "styled-components";
+import ProjectColumn from "components/form/ProjectColumn";
 
 const Project = forwardRef((props, ref) => {
+  const { register, control, errors } = props;
   const [count, setCount] = useState(0);
   const [list, setList] = useState([1]);
+  const { fields, append } = useFieldArray({
+    control,
+    name: "project",
+  });
 
   const addProject = (e) => {
     setCount((c) => c + 1);
     setList((prev) => [...prev, count]);
+    append({
+      subject: "",
+      start_period: "",
+      end_period: "",
+      use_skill: [{ skill: "" }],
+      content: "",
+    });
   };
 
   return (
     <Container className="project">
       <h1>프로젝트</h1>
       <ProjectContainer>
-        {list.map((_, idx) => (
-          <ProjectColumn key={idx} length={list.length} />
-        ))}
+        {fields.map((field, idx) => {
+          return (
+            <ProjectColumn
+              key={field.id}
+              idx={idx}
+              register={register}
+              control={control}
+              length={list.length}
+            />
+          );
+        })}
         <Button onClick={addProject}>프로젝트 추가하기</Button>
       </ProjectContainer>
     </Container>

@@ -59,6 +59,7 @@ const CareerColumn = forwardRef((props, ref) => {
           />
           <RenderSkill
             idx={idx}
+            name="career"
             {...{ control, register }}
             autoRowsHeight={autoRowsHeight}
           />
